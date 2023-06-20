@@ -14,7 +14,8 @@ class HomePage extends StatelessWidget {
             children: [
               TextSpan(
                 text: 'Wall',
-                style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                style: TextStyle(
+                    color: Color.fromARGB(255, 255, 191, 0), fontSize: 25.0),
               ),
               TextSpan(
                 text: 'Artistry',
@@ -29,20 +30,23 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 5.0,
+          ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 8.0),
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 234, 228, 228),
               border: Border.all(
-                color: const Color.fromARGB(255, 19, 106, 22),
-              ),
+                  // color: const Color.fromARGB(255, 19, 106, 22),
+                  ),
               borderRadius: BorderRadius.circular(25),
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 18.0),
               child: Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Search Wallpapers',
@@ -51,7 +55,7 @@ class HomePage extends StatelessWidget {
                         border: InputBorder.none,
                       ),
                       style: TextStyle(
-                        color: const Color.fromARGB(255, 19, 106, 22),
+                        color: Color.fromARGB(255, 19, 106, 22),
                       ),
                     ),
                   ),
@@ -59,7 +63,7 @@ class HomePage extends StatelessWidget {
                     onTap: () {
                       print('Search');
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.search,
                       color: Colors.black,
                     ),
@@ -68,7 +72,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15.0,
           ),
           SizedBox(
