@@ -10,9 +10,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Obtain the current system brightness mode
+    final Brightness systemBrightness =
+        MediaQuery.platformBrightnessOf(context);
+
+    // Define your theme data based on the system's brightness
+    final ThemeData themeData = systemBrightness == Brightness.dark
+        ? ThemeData.dark(useMaterial3: true)
+        : ThemeData.light(useMaterial3: true);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(useMaterial3: true),
+      theme: themeData,
       home: const HomePage(),
     );
   }

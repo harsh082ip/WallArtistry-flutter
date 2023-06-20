@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallartistry/views/widgets/cat_block.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key});
@@ -13,13 +14,13 @@ class HomePage extends StatelessWidget {
             children: [
               TextSpan(
                 text: 'Wall',
-                style: TextStyle(color: Colors.white, fontSize: 20.0),
+                style: TextStyle(color: Colors.amber, fontSize: 25.0),
               ),
               TextSpan(
                 text: 'Artistry',
                 style: TextStyle(
                   color: Color.fromARGB(255, 40, 225, 46),
-                  fontSize: 22.0,
+                  fontSize: 27.0,
                 ),
               ),
             ],
@@ -70,6 +71,14 @@ class HomePage extends StatelessWidget {
           SizedBox(
             height: 15.0,
           ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 100,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 30,
+                itemBuilder: (context, index) => CatBlock()),
+          )
         ],
       ),
     );
