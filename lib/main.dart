@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:wallartistry/views/screens/category.dart';
 import 'package:wallartistry/views/screens/home_page.dart';
+import 'package:wallartistry/views/screens/search_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeData,
-      home: const HomePage(),
+      home: const CategoryScreen(),
     );
   }
 }
