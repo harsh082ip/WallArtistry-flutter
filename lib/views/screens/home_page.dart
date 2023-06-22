@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:wallartistry/controllers/api.dart';
 import 'package:wallartistry/views/widgets/cat_block.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    print('init called');
+    super.initState();
+    APIs.getWallpapers();
+  }
 
   @override
   Widget build(BuildContext context) {
