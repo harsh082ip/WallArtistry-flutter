@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:wallartistry/controllers/api.dart';
+import 'package:wallartistry/models/photosModel.dart';
 import 'package:wallartistry/views/widgets/cat_block.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,11 +12,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late List<PhotosModel> trendingWallList = [];
+
+  getTrendingWallpapers() async {
+    trendingWallList = await APIs.getWallpapers();
+    setState(() {});
+  }
+
   @override
   void initState() {
     print('init called');
     super.initState();
-    APIs.getWallpapers();
+    getTrendingWallpapers();
   }
 
   @override
@@ -101,7 +110,7 @@ class _HomePageState extends State<HomePage> {
             // GridView for displaying wallpapers
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 5.0),
-              height: MediaQuery.of(context).size.height,
+              height: MediaQuery.of(context).size.height * 0.69,
               child: GridView.builder(
                 physics: const BouncingScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -109,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 7,
                     mainAxisExtent: 400),
-                itemCount: 20,
+                itemCount: trendingWallList.length,
                 itemBuilder: ((context, index) => Container(
                       height: 500,
                       width: 50,
@@ -122,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                             height: 500,
                             width: 50,
                             fit: BoxFit.cover,
-                            'https://images.pexels.com/photos/10394779/pexels-photo-10394779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+                            trendingWallList[index].imgSrc),
                       ),
                     )),
               ),
