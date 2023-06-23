@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: TextField(
                         controller: _searchController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Search Wallpapers',
                           hintStyle:
                               TextStyle(color: Color.fromARGB(255, 76, 75, 75)),
@@ -136,17 +136,21 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 15.0,
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 100,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: CatModList.length,
-                  itemBuilder: (context, index) => CatBlock(
-                        categoryImgSrc: CatModList[index].catImgUrl,
-                        categoryName: CatModList[index].catName,
-                      )),
-            ),
+            isLoading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 100,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: CatModList.length,
+                        itemBuilder: (context, index) => CatBlock(
+                              categoryImgSrc: CatModList[index].catImgUrl,
+                              categoryName: CatModList[index].catName,
+                            )),
+                  ),
 
             // GridView for displaying wallpapers
             Container(

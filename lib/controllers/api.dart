@@ -62,7 +62,8 @@ class APIs {
       "Street",
       "Flowers",
       "City",
-      "Coding"
+      "Coding",
+      "Abstract"
     ];
 
     categoryModelList.clear();
