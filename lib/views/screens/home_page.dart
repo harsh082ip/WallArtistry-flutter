@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:wallartistry/controllers/api.dart';
 import 'package:wallartistry/models/photosModel.dart';
+import 'package:wallartistry/views/screens/search_screen.dart';
 import 'package:wallartistry/views/widgets/cat_block.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  static TextEditingController _searchController = TextEditingController();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -69,8 +71,9 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.symmetric(horizontal: 18.0),
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: TextField(
+                        controller: _searchController,
                         decoration: InputDecoration(
                           hintText: 'Search Wallpapers',
                           hintStyle:
@@ -84,7 +87,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                     InkWell(
                       onTap: () {
-                        print('Search');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                SearchScreen(query: _searchController.text),
+                          ),
+                        );
                       },
                       child: const Icon(
                         Icons.search,

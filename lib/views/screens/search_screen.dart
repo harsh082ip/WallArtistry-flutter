@@ -1,10 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:wallartistry/controllers/api.dart';
+import 'package:wallartistry/models/photosModel.dart';
 
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({Key? key});
+class SearchScreen extends StatefulWidget {
+  String query;
+  SearchScreen({Key? key, required this.query});
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  late List<PhotosModel> searchRes = [];
+
+  searchResults() async {
+    searchRes = await APIs.getSearchWallpaper(widget.query);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    searchResults();
+  }
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _searchRes = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: RichText(
@@ -46,8 +68,9 @@ class SearchScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 18.0),
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: TextField(
+                        controller: _searchRes,
                         decoration: InputDecoration(
                           hintText: 'Search Wallpapers',
                           hintStyle:
@@ -61,7 +84,13 @@ class SearchScreen extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        print('Search');
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                SearchScreen(query: _searchRes.text),
+                          ),
+                        );
                       },
                       child: const Icon(
                         Icons.search,
@@ -79,7 +108,7 @@ class SearchScreen extends StatelessWidget {
             // GridView for displaying wallpapers
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 5.0),
-              height: MediaQuery.of(context).size.height,
+              height: MediaQuery.of(context).size.height * 0.79,
               child: GridView.builder(
                 physics: const BouncingScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -87,7 +116,7 @@ class SearchScreen extends StatelessWidget {
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 7,
                     mainAxisExtent: 400),
-                itemCount: 20,
+                itemCount: searchRes.length,
                 itemBuilder: ((context, index) => Container(
                       height: 500,
                       width: 50,
@@ -100,7 +129,7 @@ class SearchScreen extends StatelessWidget {
                             height: 500,
                             width: 50,
                             fit: BoxFit.cover,
-                            'https://images.pexels.com/photos/10394779/pexels-photo-10394779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+                            searchRes[index].imgSrc),
                       ),
                     )),
               ),
