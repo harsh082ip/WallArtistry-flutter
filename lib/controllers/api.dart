@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:wallartistry/models/photosModel.dart';
+import 'dart:math';
+import '../models/categoryModel.dart';
 
 //Integrating Pexels API
 class APIs {
@@ -45,5 +47,37 @@ class APIs {
       });
     });
     return searchWallpapers;
+  }
+
+  // get category wallpapers
+
+  static List<CategoryModel> categoryModelList = [];
+
+  static Future<List<CategoryModel>> getCategoriesList() async {
+    List<String> categoryName = [
+      "love",
+      "Cars",
+      "Nature",
+      "Bikes",
+      "Street",
+      "Flowers",
+      "City",
+      "Coding"
+    ];
+
+    categoryModelList.clear();
+
+    final _random = Random();
+
+    for (String catName in categoryName) {
+      PhotosModel photoModel =
+          (await getSearchWallpaper(catName))[0 + _random.nextInt(11 - 0)];
+      print("IMG SRC IS HERE");
+      print(photoModel.imgSrc);
+      categoryModelList
+          .add(CategoryModel(catImgUrl: photoModel.imgSrc, catName: catName));
+    }
+    print('returned');
+    return categoryModelList;
   }
 }

@@ -5,6 +5,8 @@ import 'package:wallartistry/models/photosModel.dart';
 import 'package:wallartistry/views/screens/search_screen.dart';
 import 'package:wallartistry/views/widgets/cat_block.dart';
 
+import '../../models/categoryModel.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
 
@@ -17,7 +19,21 @@ class _HomePageState extends State<HomePage> {
 
   getTrendingWallpapers() async {
     trendingWallList = await APIs.getWallpapers();
-    setState(() {});
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  late List<CategoryModel> CatModList = [];
+  bool isLoading = true;
+
+  GetCatDetails() async {
+    CatModList = await APIs.getCategoriesList();
+    print("GETTTING CAT MOD LIST");
+    print(CatModList);
+    setState(() {
+      CatModList = CatModList;
+    });
   }
 
   @override
@@ -25,7 +41,20 @@ class _HomePageState extends State<HomePage> {
     print('init called');
     super.initState();
     getTrendingWallpapers();
+    GetCatDetails();
   }
+
+  List<String> catNames = [
+    'bikes',
+    'cars',
+    'nature',
+    'plants',
+    'snow',
+    'couple',
+    'friends',
+    'animals',
+    'ocean'
+  ];
 
   @override
   static TextEditingController _searchController = TextEditingController();
@@ -112,8 +141,11 @@ class _HomePageState extends State<HomePage> {
               height: 100,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 30,
-                  itemBuilder: (context, index) => CatBlock()),
+                  itemCount: CatModList.length,
+                  itemBuilder: (context, index) => CatBlock(
+                        categoryImgSrc: CatModList[index].catImgUrl,
+                        categoryName: CatModList[index].catName,
+                      )),
             ),
 
             // GridView for displaying wallpapers
