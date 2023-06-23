@@ -30,8 +30,12 @@ jobs:
       - name: Build APK
         run: flutter build apk --release --split-per-abi
 
+      - name: Find APK file
+        id: find_apk
+        run: echo "::set-output name=apk_path::$(find . -name '*.apk' -print0 | xargs -0 ls -t | head -1)"
+
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
           name: App APK
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: ${{ steps.find_apk.outputs.apk_path }}
