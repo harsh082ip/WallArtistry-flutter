@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:wallartistry/controllers/api.dart';
 import 'package:wallartistry/models/photosModel.dart';
+import 'package:wallartistry/views/screens/full_screen.dart';
 import 'package:wallartistry/views/screens/search_screen.dart';
 import 'package:wallartistry/views/widgets/cat_block.dart';
 
@@ -164,19 +165,28 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSpacing: 7,
                     mainAxisExtent: 400),
                 itemCount: trendingWallList.length,
-                itemBuilder: ((context, index) => Container(
-                      height: 500,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(20.0)),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.network(
-                            height: 500,
-                            width: 50,
-                            fit: BoxFit.cover,
-                            trendingWallList[index].imgSrc),
+                itemBuilder: ((context, index) => InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FullScreen(
+                                    imgUrl: trendingWallList[index].imgSrc)));
+                      },
+                      child: Container(
+                        height: 500,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(20.0)),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.network(
+                              height: 500,
+                              width: 50,
+                              fit: BoxFit.cover,
+                              trendingWallList[index].imgSrc),
+                        ),
                       ),
                     )),
               ),
