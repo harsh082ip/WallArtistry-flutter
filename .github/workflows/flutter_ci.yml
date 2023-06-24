@@ -28,7 +28,7 @@ jobs:
         run: flutter pub get
 
       - name: Build APK
-        run: flutter build apk --release --split-per-abi
+        run: flutter build apk --target-platform android-arm,android-arm64 --split-per-abi --release
 
       - name: Find APK file
         id: find_apk
