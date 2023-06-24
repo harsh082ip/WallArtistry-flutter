@@ -37,6 +37,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^5.1.0
   http: ^1.0.0
+  image_downloader: any
+  open_file: ^3.3.2
+
+  flutter_file_downloader: ^1.1.2
+
 
 dev_dependencies:
   flutter_test:
