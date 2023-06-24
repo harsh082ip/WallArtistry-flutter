@@ -173,19 +173,22 @@ class _HomePageState extends State<HomePage> {
                                 builder: (context) => FullScreen(
                                     imgUrl: trendingWallList[index].imgSrc)));
                       },
-                      child: Container(
-                        height: 500,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(20.0)),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image.network(
-                              height: 500,
-                              width: 50,
-                              fit: BoxFit.cover,
-                              trendingWallList[index].imgSrc),
+                      child: Hero(
+                        tag: trendingWallList[index].imgSrc,
+                        child: Container(
+                          height: 500,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(20.0)),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: Image.network(
+                                height: 500,
+                                width: 50,
+                                fit: BoxFit.cover,
+                                trendingWallList[index].imgSrc),
+                          ),
                         ),
                       ),
                     )),

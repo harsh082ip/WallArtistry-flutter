@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallartistry/controllers/api.dart';
 import 'package:wallartistry/models/photosModel.dart';
+import 'package:wallartistry/views/screens/full_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   String query;
@@ -117,19 +118,31 @@ class _SearchScreenState extends State<SearchScreen> {
                     mainAxisSpacing: 7,
                     mainAxisExtent: 400),
                 itemCount: searchRes.length,
-                itemBuilder: ((context, index) => Container(
-                      height: 500,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(20.0)),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.network(
-                            height: 500,
-                            width: 50,
-                            fit: BoxFit.cover,
-                            searchRes[index].imgSrc),
+                itemBuilder: ((context, index) => InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FullScreen(
+                                    imgUrl: searchRes[index].imgSrc)));
+                      },
+                      child: Hero(
+                        tag: searchRes[index].imgSrc,
+                        child: Container(
+                          height: 500,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(20.0)),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: Image.network(
+                                height: 500,
+                                width: 50,
+                                fit: BoxFit.cover,
+                                searchRes[index].imgSrc),
+                          ),
+                        ),
                       ),
                     )),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallartistry/controllers/api.dart';
+import 'package:wallartistry/views/screens/full_screen.dart';
 import 'package:wallartistry/views/widgets/cat_block.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -124,19 +125,32 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               mainAxisSpacing: 7,
                               mainAxisExtent: 400),
                       itemCount: categoryResults.length,
-                      itemBuilder: ((context, index) => Container(
-                            height: 500,
-                            width: 50,
-                            decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(20.0)),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),
-                              child: Image.network(
-                                  height: 500,
-                                  width: 50,
-                                  fit: BoxFit.cover,
-                                  categoryResults[index].imgSrc),
+                      itemBuilder: ((context, index) => InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => FullScreen(
+                                          imgUrl:
+                                              categoryResults[index].imgSrc)));
+                            },
+                            child: Hero(
+                              tag: categoryResults[index].imgSrc,
+                              child: Container(
+                                height: 500,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: Image.network(
+                                      height: 500,
+                                      width: 50,
+                                      fit: BoxFit.cover,
+                                      categoryResults[index].imgSrc),
+                                ),
+                              ),
                             ),
                           )),
                     ),
