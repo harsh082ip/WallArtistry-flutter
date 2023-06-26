@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
-import 'package:wallartistry/Themes/light_and_dark_theme.dart';
 import 'package:wallartistry/controllers/api.dart';
 import 'package:wallartistry/models/photosModel.dart';
 import 'package:wallartistry/views/screens/full_screen.dart';
