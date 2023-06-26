@@ -1,9 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:wallartistry/views/screens/category.dart';
+
 import 'package:wallartistry/views/screens/home_page.dart';
-import 'package:wallartistry/views/screens/search_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

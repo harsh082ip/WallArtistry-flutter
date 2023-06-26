@@ -37,12 +37,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^5.1.0
   http: ^1.0.0
-  image_downloader: any
+  # image_downloader: any
   open_file: ^3.3.2
-  url_launcher: ^6.0.0
+  # url_launcher: ^6.0.0
   open_file_plus: ^3.4.1
   flutter_file_downloader: ^1.1.2
-  flutter_downloader: ^1.5.1
+  # flutter_downloader: ^1.5.1
   permission_handler: ^10.3.0
 
 
