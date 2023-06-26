@@ -1,4 +1,4 @@
-# wallartistry
+# Wall Artistry
 
 A new Flutter project.
 
