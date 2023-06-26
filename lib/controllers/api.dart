@@ -32,7 +32,7 @@ class APIs {
     print('value obtained');
     await http.get(
       Uri.parse(
-          'https://api.pexels.com/v1/search?query=$query&per_page=28&page=1'),
+          'https://api.pexels.com/v1/search?query=$query&per_page=98&page=1'),
       headers: {
         'Authorization':
             'HhkLKrmFtvFbWun0fkRROQoAgJDgnLDuGvDqGccF1YusqBad2pziI0o4'

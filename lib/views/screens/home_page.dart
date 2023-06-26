@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart';
+import 'package:wallartistry/Themes/light_and_dark_theme.dart';
 import 'package:wallartistry/controllers/api.dart';
 import 'package:wallartistry/models/photosModel.dart';
 import 'package:wallartistry/views/screens/full_screen.dart';
@@ -57,6 +59,28 @@ class _HomePageState extends State<HomePage> {
     'ocean'
   ];
 
+  bool isDarkTheme = false; // Track the current theme
+  int imageIndex = 0; // Track the current image index
+
+  void toggleThemeAndImage() {
+    setState(() {
+      isDarkTheme = !isDarkTheme;
+      imageIndex = (imageIndex + 1) % 2; // Toggle between image indices 0 and 1
+    });
+    // Set the system overlay style based on the theme
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: isDarkTheme ? Colors.black : Colors.white,
+      statusBarIconBrightness: isDarkTheme ? Brightness.light : Brightness.dark,
+    ));
+
+    // Set the theme mode
+    ThemeMode themeMode = isDarkTheme ? ThemeMode.dark : ThemeMode.light;
+    // Use the themeMode to set the theme for the entire app
+    // You can use your own theme implementation or use a package like provider to manage the theme
+    // For example:
+    // MyApp.setTheme(themeMode);
+  }
+
   @override
   static TextEditingController _searchController = TextEditingController();
   Widget build(BuildContext context) {
@@ -81,6 +105,14 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: toggleThemeAndImage,
+            icon: isDarkTheme
+                ? Image.asset('assets/images/light_off.png')
+                : Image.asset('assets/images/light_on.png'),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
