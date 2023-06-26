@@ -14,7 +14,7 @@ class APIs {
       Uri.parse('https://api.pexels.com/v1/curated'),
       headers: {
         'Authorization':
-            '[YOUR API KEY]'
+            'HhkLKrmFtvFbWun0fkRROQoAgJDgnLDuGvDqGccF1YusqBad2pziI0o4'
       },
     ).then((value) {
       Map<String, dynamic> jsonData = jsonDecode(value.body);
