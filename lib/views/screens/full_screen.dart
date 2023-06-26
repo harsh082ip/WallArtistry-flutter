@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 // import 'package:image_downloader/image_downloader.dart';
@@ -5,7 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 // import 'package:open_file/open_file.dart';
 // import 'package:open_filex/open_filex.dart';
-import 'package:open_file/open_file.dart';
+// import 'package:open_file/open_file.dart';
+// import 'package:url_launcher/url_launcher.dart';
+
+// import 'package:open_file/open_file.dart';
+// import 'package:url_launcher/url_launcher.dart';
+import 'package:open_file_plus/open_file_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class FullScreen extends StatefulWidget {
   String imgUrl;
@@ -55,6 +63,45 @@ class _FullScreenState extends State<FullScreen> {
   //   }
   // }
 
+  // Future<void> openFile(String filePath) async {
+  //   print('got the path: $filePath');
+  //   if (await canLaunchUrl(Uri.file(filePath))) {
+  //     print('can launch');
+  //     await launchUrl(Uri.file(filePath));
+  //   } else {
+  //     print('Could not launch $filePath');
+  //   }
+  // }
+
+  // void openFile(String filePath) async {
+  //   print('func called');
+  //   await OpenFile.open(
+  //           '/storage/emulated/0/Download/pexels-photo-17325851-1.jpeg')
+  //       .then((value) => print('func ended'));
+  // }
+
+  void openFile(String filePath) async {
+    print('func called');
+    await OpenFile.open(filePath).then((value) => print('func ended'));
+  }
+
+  Future<void> requestStoragePermission(Permission permission) async {
+    final status = await permission.request();
+    if (status.isGranted) {
+      print('granted');
+      // } else if (await Permission.storage.request().isPermanentlyDenied) {
+      //   print('Permanently denied');
+    } else {
+      print('Not granted');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    requestStoragePermission(Permission.photos);
+  }
+
   double? _progress;
 
   @override
@@ -72,14 +119,15 @@ class _FullScreenState extends State<FullScreen> {
                 },
               );
             },
-            onDownloadCompleted: (path) {
+            onDownloadCompleted: (path) async {
               print('path: $path');
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('File Saved at: $path'),
                 ),
               );
-              OpenFile.open("$path");
+              // OpenFile.open("$path");
+              openFile(path);
 
               setState(() {
                 _progress = null;

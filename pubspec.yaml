@@ -39,8 +39,11 @@ dependencies:
   http: ^1.0.0
   image_downloader: any
   open_file: ^3.3.2
-
+  url_launcher: ^6.0.0
+  open_file_plus: ^3.4.1
   flutter_file_downloader: ^1.1.2
+  flutter_downloader: ^1.5.1
+  permission_handler: ^10.3.0
 
 
 dev_dependencies:
