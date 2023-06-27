@@ -35,19 +35,86 @@ class _FullScreenState extends State<FullScreen> {
     requestStoragePermission(Permission.photos);
     fPath = '';
     count = 0;
+    homeCount = 0;
+    lockCount = 0;
+    bothCount = 0;
   }
 
   int count = 0;
+  int homeCount = 0;
+  int lockCount = 0;
+  int bothCount = 0;
   double? _progress;
 
-  void setWallpapers(String path) async {
-    await AsyncWallpaper.setWallpaperFromFile(
-      filePath: path,
-      wallpaperLocation: AsyncWallpaper.HOME_SCREEN,
-      goToHome: true,
-      toastDetails: ToastDetails.success(),
-      errorToastDetails: ToastDetails.error(),
+  Future<void> _showMyDialog() async {
+    print('in dialogue box');
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Select Screen😊'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('In which screen you would like to set the Wallpaper'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Home Screen'),
+              onPressed: () {
+                homeCount++;
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Lock Screen'),
+              onPressed: () {
+                lockCount++;
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Both'),
+              onPressed: () {
+                bothCount++;
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
+  }
+
+  void setWallpapers(String path, String screen) async {
+    if (screen == 'Home') {
+      await AsyncWallpaper.setWallpaperFromFile(
+        filePath: path,
+        wallpaperLocation: AsyncWallpaper.HOME_SCREEN,
+        goToHome: true,
+        toastDetails: ToastDetails.success(),
+        errorToastDetails: ToastDetails.error(),
+      );
+    } else if (screen == 'lock') {
+      await AsyncWallpaper.setWallpaperFromFile(
+        filePath: path,
+        wallpaperLocation: AsyncWallpaper.LOCK_SCREEN,
+        goToHome: true,
+        toastDetails: ToastDetails.success(),
+        errorToastDetails: ToastDetails.error(),
+      );
+    } else {
+      await AsyncWallpaper.setWallpaperFromFile(
+        filePath: path,
+        wallpaperLocation: AsyncWallpaper.BOTH_SCREENS,
+        goToHome: true,
+        toastDetails: ToastDetails.success(),
+        errorToastDetails: ToastDetails.error(),
+      );
+    }
   }
 
   // download wallpaper func
@@ -71,7 +138,7 @@ class _FullScreenState extends State<FullScreen> {
           ),
         );
 
-        openFile(path);
+        // openFile(path);
         fPath = path;
         setState(() {
           _progress = null;
@@ -97,7 +164,17 @@ class _FullScreenState extends State<FullScreen> {
             )
           : ElevatedButton(
               onPressed: () {
-                setWallpapers(fPath);
+                _showMyDialog().then((value) {
+                  if (homeCount > 0) {
+                    setWallpapers(fPath, 'Home');
+                  } else if (lockCount > 0) {
+                    setWallpapers(fPath, 'lock');
+                  } else if (bothCount > 0) {
+                    setWallpapers(fPath, 'both');
+                  } else {
+                    print('Some Error Occured');
+                  }
+                });
               },
               child: Text('Set Wallpaper')),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
