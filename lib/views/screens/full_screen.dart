@@ -138,7 +138,7 @@ class _FullScreenState extends State<FullScreen> {
           ),
         );
 
-        // openFile(path);
+        openFile(path);
         fPath = path;
         setState(() {
           _progress = null;
