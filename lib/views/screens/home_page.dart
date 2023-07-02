@@ -21,9 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   getTrendingWallpapers() async {
     trendingWallList = await APIs.getWallpapers();
-    setState(() {
-      isLoading = false;
-    });
+    setState(() {});
   }
 
   late List<CategoryModel> CatModList = [];
@@ -35,6 +33,7 @@ class _HomePageState extends State<HomePage> {
     print(CatModList);
     setState(() {
       CatModList = CatModList;
+      isLoading = false;
     });
   }
 
@@ -68,6 +67,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     return Scaffold(
+      // AppBar
       appBar: AppBar(
         title: RichText(
           textAlign: TextAlign.center,
@@ -121,6 +121,7 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   children: [
                     Expanded(
+                      // search box
                       child: TextField(
                         controller: _searchController,
                         decoration: const InputDecoration(
@@ -158,7 +159,9 @@ class _HomePageState extends State<HomePage> {
             ),
             isLoading
                 ? const Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      color: Color.fromARGB(255, 44, 172, 49),
+                    ),
                   )
                 : SizedBox(
                     width: MediaQuery.of(context).size.width,
