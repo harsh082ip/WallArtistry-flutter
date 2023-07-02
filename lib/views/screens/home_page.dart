@@ -6,7 +6,7 @@ import 'package:wallartistry/models/photosModel.dart';
 import 'package:wallartistry/views/screens/full_screen.dart';
 import 'package:wallartistry/views/screens/search_screen.dart';
 import 'package:wallartistry/views/widgets/cat_block.dart';
-
+import 'package:wallartistry/main.dart';
 import '../../models/categoryModel.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,28 +61,12 @@ class _HomePageState extends State<HomePage> {
   bool isDarkTheme = false; // Track the current theme
   int imageIndex = 0; // Track the current image index
 
-  void toggleThemeAndImage() {
-    setState(() {
-      isDarkTheme = !isDarkTheme;
-      imageIndex = (imageIndex + 1) % 2; // Toggle between image indices 0 and 1
-    });
-    // Set the system overlay style based on the theme
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: isDarkTheme ? Colors.black : Colors.white,
-      statusBarIconBrightness: isDarkTheme ? Brightness.light : Brightness.dark,
-    ));
-
-    // Set the theme mode
-    ThemeMode themeMode = isDarkTheme ? ThemeMode.dark : ThemeMode.light;
-    // Use the themeMode to set the theme for the entire app
-    // You can use your own theme implementation or use a package like provider to manage the theme
-    // For example:
-    // MyApp.setTheme(themeMode);
-  }
+  int themeCount = 0;
 
   @override
   static TextEditingController _searchController = TextEditingController();
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: RichText(
@@ -106,8 +90,12 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-            onPressed: toggleThemeAndImage,
-            icon: isDarkTheme
+            onPressed: () {
+              themeCount++;
+
+              setState(() {});
+            },
+            icon: (themeCount % 2 != 0)
                 ? Image.asset('assets/images/light_off.png')
                 : Image.asset('assets/images/light_on.png'),
           ),
@@ -169,7 +157,7 @@ class _HomePageState extends State<HomePage> {
               height: 15.0,
             ),
             isLoading
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : SizedBox(

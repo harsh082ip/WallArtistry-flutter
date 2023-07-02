@@ -156,27 +156,60 @@ class _FullScreenState extends State<FullScreen> {
     return Scaffold(
       key: _scaffoldKey,
       floatingActionButton: count == 0
-          ? ElevatedButton(
-              onPressed: () {
-                downloadWallpaper();
-              },
-              child: Text('Download Wallpaper'),
+          ? Container(
+              height: 50.0,
+              width: MediaQuery.of(context).size.width * 0.95,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 57, 179, 61),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8.0),
+                    ),
+                  ),
+                  side: const BorderSide(
+                    color: Colors.white,
+                  ),
+                ),
+                onPressed: () {
+                  downloadWallpaper();
+                },
+                child: const Text(
+                  'Download Wallpaper',
+                  style: TextStyle(fontSize: 22.0, color: Colors.white),
+                ),
+              ),
             )
-          : ElevatedButton(
-              onPressed: () {
-                _showMyDialog().then((value) {
-                  if (homeCount > 0) {
-                    setWallpapers(fPath, 'Home');
-                  } else if (lockCount > 0) {
-                    setWallpapers(fPath, 'lock');
-                  } else if (bothCount > 0) {
-                    setWallpapers(fPath, 'both');
-                  } else {
-                    print('Some Error Occured');
-                  }
-                });
-              },
-              child: Text('Set Wallpaper')),
+          : Container(
+              height: 50.0,
+              width: MediaQuery.of(context).size.width * 0.95,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 57, 179, 61),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.0),
+                        ),
+                      ),
+                      side: const BorderSide(color: Colors.white)),
+                  onPressed: () {
+                    _showMyDialog().then((value) {
+                      if (homeCount > 0) {
+                        setWallpapers(fPath, 'Home');
+                      } else if (lockCount > 0) {
+                        setWallpapers(fPath, 'lock');
+                      } else if (bothCount > 0) {
+                        setWallpapers(fPath, 'both');
+                      } else {
+                        print('Some Error Occured');
+                      }
+                    });
+                  },
+                  child: const Text(
+                    'Set Wallpaper',
+                    style: TextStyle(fontSize: 22.0, color: Colors.white),
+                  )),
+            ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Stack(
         children: [
