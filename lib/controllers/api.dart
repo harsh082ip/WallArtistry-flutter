@@ -11,7 +11,7 @@ class APIs {
   static Future<List<PhotosModel>> getWallpapers() async {
     print('value obtained');
     await http.get(
-      Uri.parse('https://api.pexels.com/v1/curated'),
+      Uri.parse('https://api.pexels.com/v1/curated?per_page=98'),
       headers: {'Authorization': '[YOUR API KEY]'},
     ).then((value) {
       Map<String, dynamic> jsonData = jsonDecode(value.body);
