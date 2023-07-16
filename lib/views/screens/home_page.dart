@@ -3,8 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 import 'package:wallartistry/controllers/api.dart';
 import 'package:wallartistry/models/photosModel.dart';
+import 'package:wallartistry/views/screens/developers_about_page.dart';
 import 'package:wallartistry/views/screens/full_screen.dart';
 import 'package:wallartistry/views/screens/search_screen.dart';
+import 'package:wallartistry/views/widgets/app_drawer.dart';
 import 'package:wallartistry/views/widgets/cat_block.dart';
 import 'package:wallartistry/main.dart';
 import '../../models/categoryModel.dart';
@@ -67,6 +69,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     return Scaffold(
+      // app drawer
+      drawer: AppDrawer(),
+
       // AppBar
       appBar: AppBar(
         title: RichText(
@@ -165,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                   )
                 : SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    height: 100,
+                    height: 90,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: CatModList.length,

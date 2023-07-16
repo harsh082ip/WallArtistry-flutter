@@ -12,7 +12,10 @@ class APIs {
     print('value obtained');
     await http.get(
       Uri.parse('https://api.pexels.com/v1/curated?per_page=98'),
-      headers: {'Authorization': '[YOUR API KEY]'},
+      headers: {
+        'Authorization':
+            'HhkLKrmFtvFbWun0fkRROQoAgJDgnLDuGvDqGccF1YusqBad2pziI0o4'
+      },
     ).then((value) {
       Map<String, dynamic> jsonData = jsonDecode(value.body);
       List photos = jsonData['photos'];
@@ -30,7 +33,10 @@ class APIs {
     await http.get(
       Uri.parse(
           'https://api.pexels.com/v1/search?query=$query&per_page=98&page=1'),
-      headers: {'Authorization': '[YOUR API KEY]'},
+      headers: {
+        'Authorization':
+            'HhkLKrmFtvFbWun0fkRROQoAgJDgnLDuGvDqGccF1YusqBad2pziI0o4'
+      },
     ).then((value) {
       Map<String, dynamic> jsonData = jsonDecode(value.body);
       List photos = jsonData['photos'];
