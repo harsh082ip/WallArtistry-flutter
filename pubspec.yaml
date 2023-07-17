@@ -45,6 +45,9 @@ dependencies:
 
   permission_handler: ^10.3.0
   provider: ^6.0.5
+  external_app_launcher: ^3.1.0
+  
+  webview_flutter: ^3.0.4
 
 
 dev_dependencies:
@@ -91,9 +94,9 @@ flutter:
         - asset: assets/fonts/Kablammo-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
+    - family: Pacifico
+      fonts:
+        - asset: assets/fonts/Pacifico-Regular.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

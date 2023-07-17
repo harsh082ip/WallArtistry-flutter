@@ -1,5 +1,9 @@
+import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:wallartistry/views/screens/view_profile_handles.dart';
+
 import 'package:wallartistry/views/widgets/app_drawer.dart';
+import 'package:wallartistry/views/widgets/profile_handles.dart';
 import '../widgets/custom_appbar.dart';
 
 class DevelopersAboutScreen extends StatelessWidget {
@@ -53,7 +57,7 @@ class DevelopersAboutScreen extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 50.0),
-                  child: ListTile(
+                  child: const ListTile(
                     title: Text(
                       'About Me',
                       style: TextStyle(
@@ -62,11 +66,95 @@ class DevelopersAboutScreen extends StatelessWidget {
                           decoration: TextDecoration.underline),
                     ),
                     subtitle: Text(
-                      'Hello My name is Harsh Vardhan Singh, a passionate Flutter and DevOps enthusiast with a hunger for continuous learning 🚀📱 Curiosity-driven and constantly seeking out the latest technological advancements to broaden my skill set. 🙂🙂',
+                      'Hello Everyone👋, My name is Harsh Vardhan Singh, a passionate Flutter and DevOps enthusiast with a hunger for continuous learning 🚀📱 Curiosity-driven and constantly seeking out the latest technological advancements to broaden my skill set. 🙂🙂',
                       style: TextStyle(fontSize: 18.0),
                     ),
                   ),
-                )
+                ),
+                const Spacer(),
+                Text(
+                  'Wanna Connect with me?🤔',
+                  style: TextStyle(fontSize: 22.0),
+                ),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ViewProfileHandles(
+                                profileUrl:
+                                    'https://www.instagram.com/coolboyharsh_/')));
+                  },
+                  child: ProfileHandles(
+                    imgUrl: 'assets/images/instagram.png',
+                    containerColor: Colors.white,
+                    text: 'Instagram',
+                    textColor: Colors.black,
+                    fontFamily: 'Pacifico',
+                  ),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ViewProfileHandles(
+                                profileUrl: 'https://twitter.com/harsh082ip')));
+                  },
+                  child: ProfileHandles(
+                    imgUrl: 'assets/images/twitter.png',
+                    containerColor: Color.fromARGB(255, 3, 169, 244),
+                    text: 'Twitter',
+                    textColor: Colors.white,
+                    fontFamily: 'Pacifico',
+                  ),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ViewProfileHandles(
+                                profileUrl: 'https://github.com/harsh082ip')));
+                  },
+                  child: ProfileHandles(
+                      imgUrl: 'assets/images/github.png',
+                      containerColor: Colors.white,
+                      text: 'Github',
+                      textColor: Colors.black,
+                      fontFamily: 'Pacifico'),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ViewProfileHandles(
+                                profileUrl:
+                                    'https://www.linkedin.com/in/harsh-vardhan-singh-35852a252/')));
+                  },
+                  child: ProfileHandles(
+                      imgUrl: 'assets/images/linkedin.png',
+                      containerColor: Color.fromARGB(255, 0, 119, 181),
+                      text: 'Linkedin',
+                      textColor: Colors.white,
+                      fontFamily: 'Pacifico'),
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
               ],
             ),
           ),
