@@ -5,6 +5,15 @@ import '../screens/developers_about_page.dart';
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
+  navigator(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DevelopersAboutScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -24,10 +33,8 @@ class AppDrawer extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => DevelopersAboutScreen()));
+            Navigator.pop(context);
+            navigator(context);
           },
           leading: Icon(Icons.info),
           title: Text('About the Developer'),
